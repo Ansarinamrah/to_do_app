@@ -6,22 +6,18 @@ import '../bloc/task_bloc.dart';
 import '../bloc/task_event.dart';
 import '../bloc/task_state.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 
 class _HomeScreenState extends State<HomeScreen> {
 
   final TextEditingController _searchController = TextEditingController();
   String searchQuery = '';
   List<TaskModel> taskList = [];
-  @override
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 : filteredTasks.reduce(
                   (a, b) => a.date.isBefore(b.date) ? a : b,
             );
-
             if (allTasks.isEmpty) {
               return _buildEmptyHome();
             }
-
             return Column(
               children: [
                 Padding(
@@ -90,35 +84,37 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Align(
-          alignment: Alignment.centerRight,
-          child: GestureDetector(
-          onTap: () {
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+            onTap: () {
           showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
+            context: context,
+            builder: (_) => AlertDialog(
           backgroundColor: Colors.grey[900],
-          title: const Text("Clear All Tasks?", style: TextStyle(color: Colors.white)),
-          content: const Text("Are you sure you want to delete all tasks?", style: TextStyle(color: Colors.white70)),
+            title: const Text("Clear All Tasks?", style: TextStyle(color: Colors.white)),
+            content: const Text("Are you sure you want to delete all tasks?", style: TextStyle(color: Colors.white70)),
           actions: [
-          TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text("Cancel", style: TextStyle(color: Colors.white54)),
+            TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel", style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
           onPressed: () {
-          context.read<TaskBloc>().add(ClearAllTasksEvent());
-          Navigator.pop(context);
+            context.read<TaskBloc>().add(ClearAllTasksEvent());
+            Navigator.pop(context);
           },
           child: const Text("Clear All", style: TextStyle(color: Colors.redAccent)),
           ),
-          ],
-          ),
-          );
+              ],
+              ),
+              );
           },
           child: const Text(
           "Clear All",
           style: TextStyle(color: Color(0xFF8687E7), fontSize: 14, fontWeight: FontWeight.w500),
-          ),),),),
+          ),
+            ),
+          ),),
                 if (filteredTasks.isEmpty && searchQuery.isNotEmpty)
                   const Padding(
                     padding: EdgeInsets.only(top: 80),
@@ -152,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     floatingActionButton: Padding(
-    padding: const EdgeInsets.only(bottom: 18.0, right: 10.0), // adjust as needed
+    padding: const EdgeInsets.only(bottom: 18.0, right: 10.0),
     child:  SizedBox(
       width: 70,
       height: 70,
@@ -164,15 +160,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     },
     backgroundColor: const Color(0xFF8687E7),
-    shape: const CircleBorder(),
-    child: const Icon(
-    Icons.add,
-    color: Colors.white,  // ✅ White color for plus icon
-    size: 35,             // ✅ Bigger icon size
+      shape: const CircleBorder(),
+      child: const Icon(
+      Icons.add,
+      color: Colors.white,
+      size: 35,
     ),
     ),
     )));
   }
+
 
   Widget _buildTaskCard(TaskModel task, TaskModel? nearestTask)
   {
