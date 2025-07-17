@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
       height: 70,
     child: FloatingActionButton(
       onPressed: () {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const AddTaskScreen()),
     );
