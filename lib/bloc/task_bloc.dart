@@ -50,6 +50,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         emit(TaskLoaded(tasks));
       }
     });
+
     on<UpdateTaskEvent>((event, emit) async {
       if (state is TaskLoaded) {
         await dbHelper.updateTask(event.updatedTask);
@@ -57,6 +58,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         emit(TaskLoaded(tasks));
       }
     });
+
     on<DeleteTaskEvent>((event, emit) async {
       await dbHelper.deleteTask(event.id);
       final tasks = await dbHelper.getAllTasks();
